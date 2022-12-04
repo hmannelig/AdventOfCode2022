@@ -1,8 +1,5 @@
 f = open("rock_paper_scissors_input").read().splitlines()
 
-points = ["Rock", "Paper", "Scissors"]
-round_outcome = ["Lose", "Draw", "Win"]
-
 
 def is_win(moves) -> bool:
     winning_moves = {
@@ -96,8 +93,7 @@ def get_second_part_points(moves_list) -> int:
     return round_result
 
 
-first_part_score = 0
-second_part_score = 0
+first_part_score = second_part_score = 0
 for line in f:
     split_line = line.split(" ")
 

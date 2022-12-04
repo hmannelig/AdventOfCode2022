@@ -1,7 +1,6 @@
 f = open('camp_cleanup').read().splitlines()
 
-count = 0
-count_total_overlaps = 0
+count = count_total_overlaps = 0
 
 
 def is_single_overlap(section_one, section_two) -> bool:

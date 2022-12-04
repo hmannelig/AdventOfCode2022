@@ -3,12 +3,8 @@ import string
 f = open("rucksack_input").read().splitlines()
 
 alphabet = list(string.ascii_letters)
-priority_count = 0
-badges_priority_count = 0
-three_lines_count = 0
+priority_count = badges_priority_count = three_lines_count = 0
 lines_set = []
-
-test = 0
 
 for line in f:
 
@@ -25,7 +21,6 @@ for line in f:
 
     if three_lines_count == 3:
         three_lines_count = 0
-        test += 1
 
         for element in lines_set.__getitem__(0):
             if element in lines_set.__getitem__(1) and element in lines_set.__getitem__(2):
