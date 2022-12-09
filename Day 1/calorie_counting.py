@@ -2,7 +2,7 @@ def is_smaller(calories, n) -> bool:
     return calories < n
 
 
-f = open("calorie_counting").read().splitlines()
+file = open("calorie_counting").read().splitlines()
 
 max_calories = second_max = third_max = temp = 0
 

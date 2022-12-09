@@ -1,4 +1,4 @@
-f = open('camp_cleanup').read().splitlines()
+file = open('camp_cleanup').read().splitlines()
 
 count = count_total_overlaps = 0
 

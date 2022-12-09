@@ -1,6 +1,6 @@
 import string
 
-f = open("rucksack_input").read().splitlines()
+file = open("rucksack_input").read().splitlines()
 
 alphabet = list(string.ascii_letters)
 priority_count = badges_priority_count = three_lines_count = 0

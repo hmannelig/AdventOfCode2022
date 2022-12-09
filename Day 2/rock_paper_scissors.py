@@ -1,4 +1,4 @@
-f = open("rock_paper_scissors_input").read().splitlines()
+file = open("rock_paper_scissors_input").read().splitlines()
 
 
 def is_win(moves) -> bool:
