@@ -7,16 +7,16 @@ def check_for_marker(items, size_limit) -> bool:
 
 
 def get_marker_char_count(size_limit) -> int:
-    datastream_buffer, count = [], 0
+    datastream_queue_buffer, count = [], 0
 
     for e in text:
-        datastream_buffer.append(e)
+        datastream_queue_buffer.append(e)
         count += 1
 
-        if len(datastream_buffer) == size_limit:
-            if check_for_marker(datastream_buffer, size_limit):
+        if len(datastream_queue_buffer) == size_limit:
+            if check_for_marker(datastream_queue_buffer, size_limit):
                 break
-            datastream_buffer.pop(0)
+            datastream_queue_buffer.pop(0)
 
     return count
 
