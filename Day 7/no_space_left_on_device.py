@@ -9,12 +9,6 @@ class File:
         self.__name = name
         self.__size = size
 
-    def set_file_name(self, name: str):
-        self.__name = name
-
-    def set_file_size(self, size: int):
-        self.__size = size
-
     def get_file_name(self) -> str:
         return self.__name
 
@@ -24,17 +18,21 @@ class File:
 
 class Directory:
     __dir_name: str = None
-    __folders, __files = [], []
-    __parent_dir = None
+    __folders, __files, __parent_dir = None, None, None
 
     def __init__(self, dir_name: str, parent_dir):
         self.__dir_name = dir_name
         self.__parent_dir = parent_dir
+        self.__folders, self.__files = [], []
 
     def get_size(self) -> int:
         return self.__get_folders_size() + self.__get_files_size()
 
     def __get_folders_size(self) -> int:
+
+        if len(self.__folders) == 0:
+            return 0
+
         total_size = 0
         for folder in self.__folders:
             total_size += folder.get_size()
@@ -42,6 +40,10 @@ class Directory:
         return total_size
 
     def __get_files_size(self) -> int:
+
+        if len(self.__files) == 0:
+            return 0
+
         total_size = 0
         for f in self.__files:
             total_size += f.get_file_size()
@@ -50,8 +52,8 @@ class Directory:
 
     def get_contents(self) -> str:
         content = ''
-        # for fol in self.__folders:
-        #     content += fol.get_dir_name() + '\n'
+        for fol in self.__folders:
+            content += fol.get_dir_name() + '\n'
 
         for f in self.__files:
             content += f.get_file_name() + '\n'
@@ -59,7 +61,9 @@ class Directory:
         return content
 
     def add_dir(self, dir):
-        self.__folders.append(dir)
+
+        if not self.contains_dir(dir.get_dir_name()):
+            self.__folders.append(dir)
 
     def contains_dir(self, dir_name) -> bool:
         for fol in self.__folders:
@@ -87,9 +91,6 @@ class Directory:
     def get_dir_name(self) -> str:
         return self.__dir_name
 
-    def set_dir_name(self, name):
-        self.__dir_name = name
-
     def contains_file(self, file_name: str):
 
         for f in self.__files:
@@ -99,19 +100,18 @@ class Directory:
         return False
 
     def add_file(self, f: File):
-        self.__files.append(f)
+
+        if not self.contains_file(f.get_file_name()):
+            self.__files.append(f)
 
     def get_folders(self):
         return self.__folders
 
 
 root_dir: Directory = Directory('/', None)
-print(id(root_dir))
 
 for line in file:
     line = line.split(' ')
-
-    # print(line)
 
     if line[0] == '$' and line[1] == 'cd':
 
@@ -119,8 +119,6 @@ for line in file:
             print('Going back one directory from', root_dir.get_dir_name(), 'to',
                   root_dir.get_parent_dir().get_dir_name())
             root_dir = root_dir.get_parent_dir()
-            # print(id(root_dir))
-            # print('Current directory', root_dir.get_dir_name())
 
         elif line[2] != root_dir.get_dir_name():
 
@@ -136,10 +134,14 @@ for line in file:
                 print('Moving from current directory', root_dir.get_dir_name(), 'to directory', line[2])
                 root_dir = root_dir.get_dir(line[2])
 
-    if line[0].isnumeric() and not root_dir.contains_file(line[1]):
+    elif line[0].isnumeric() and not root_dir.contains_file(line[1]):
         print('Adding new file', line[1], 'to', root_dir.get_dir_name())
         new_file: File = File(line[1], int(line[0]))
         root_dir.add_file(new_file)
 
+while root_dir.get_dir_name() != '/':
+    root_dir = root_dir.get_parent_dir()
 
+print(root_dir.get_dir_name())
 print(root_dir.get_contents())
+print(root_dir.get_size())
