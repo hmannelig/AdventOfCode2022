@@ -18,7 +18,7 @@ def get_top_score(col_i, row_i) -> bool:
         row_i -= 1
         c += 1
         if grid[row_i][col_i] >= tree:
-            return c
+            break
 
     return c
 
@@ -30,7 +30,7 @@ def get_bottom_score(col_i, row_i) -> bool:
         row_i += 1
         c += 1
         if grid[row_i][col_i] >= tree:
-            return c
+            break
 
     return c
 
@@ -42,7 +42,7 @@ def get_left_score(col_i, row_i) -> bool:
         col_i -= 1
         c += 1
         if grid[row_i][col_i] >= tree:
-            return c
+            break
 
     return c
 
@@ -54,9 +54,10 @@ def get_right_score(col_i, row_i) -> bool:
         col_i += 1
         c += 1
         if grid[row_i][col_i] >= tree:
-            return c
+            break
 
     return c
+
 
 visible_trees_count, grid = 0, []
 for line in file:
