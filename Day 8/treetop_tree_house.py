@@ -1,5 +1,7 @@
 file = open('treetop_tree_house').read().splitlines()
 
+tree_score = 0
+
 
 def is_visible(col_i, row_i) -> bool:
     return is_visible_from_top(col_i, row_i)\
@@ -9,7 +11,6 @@ def is_visible(col_i, row_i) -> bool:
 
 
 def is_visible_from_top(col_i, row_i) -> bool:
-
     tree = grid[row_i][col_i]
     while row_i > 0:
         row_i -= 1
@@ -30,7 +31,6 @@ def is_visible_from_bottom(col_i, row_i) -> bool:
 
 
 def is_visible_from_left(col_i, row_i) -> bool:
-
     tree = grid[row_i][col_i]
     while col_i > 0:
         col_i -= 1
@@ -41,7 +41,6 @@ def is_visible_from_left(col_i, row_i) -> bool:
 
 
 def is_visible_from_right(col_i, row_i) -> bool:
-
     tree = grid[row_i][col_i]
     while col_i < len(grid[row_i]) - 1:
         col_i += 1
